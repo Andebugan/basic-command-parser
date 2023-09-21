@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SimpleCommandParser.ValueParsers.IntParsing
 {
-    internal class IntValueParser
+    internal class IntParser
     {
     }
 }

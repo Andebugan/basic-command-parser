@@ -5,6 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace SimpleCommandParser.ValueParsers.FloatParsing {
-    internal class FloatValueParser {
+    internal class FloatParser {
     }
 }

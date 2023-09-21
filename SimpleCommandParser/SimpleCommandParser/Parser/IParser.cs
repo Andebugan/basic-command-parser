@@ -6,11 +6,9 @@ using System.Text;
 
 namespace SimpleCommandParser.Parser {
     internal interface IParser {
-        public ICommand Parse(string input);
+        public string CommandDelimeter { get; set; }
+        public IEnumerable<ICommand> Commands { get; set; }
 
-        public ICommand Parse(IEnumerable<string> input);
-
-        public string commandDelimeter { get; }
-        public string optionDelimeter { get; }
+        public void Parse(string input);
     }
 }
