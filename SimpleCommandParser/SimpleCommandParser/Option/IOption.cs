@@ -11,9 +11,11 @@ namespace SimpleCommandParser {
         public string Description { get; set; }
         public bool Mandatory { get; set; }
         public bool Used { get; set; }
+        public IList<IOption> SubOptions { get; set; }
 
         public void Parse(string input);
+        public string TryParse(string input, ref bool success);
         public void Clear();
-        public void Parse(IEnumerable<string> input);
+        public string Help();
     }
 }

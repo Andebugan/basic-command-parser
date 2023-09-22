@@ -23,6 +23,8 @@ namespace SimpleCommandParser {
         }
 
         public void Parse(string input) {
+            input = input.Remove(0, input.IndexOf(Name) + Name.Length);
+
             var paramTrimmed = input.Trim();
             if (paramTrimmed.Length == 0 && (Options.Where(x => x.Mandatory == true)).Count() == 0) {
                 throw new Exception("command parameters are empty");
@@ -47,13 +49,38 @@ namespace SimpleCommandParser {
             }
 
             // phase two - parse all other unused options, mandatory first, then others in the order they appear in the options list
+            bool found;
             if (options.Count() > 0) {
+                while (input.Length > 0) {
+                    found = false;
+                    var unusedMandatoryOptions = Options.Where(x => x.Used == false && x.Mandatory == true);
+                    if (unusedMandatoryOptions.Count() > 0) {
+                        foreach (var option in unusedMandatoryOptions) {
+                            input = option.TryParse(input, ref found);
+                            if (found) { break; }
+                        }
+                    }
+                    else {
+                        var unusedOptions = Options.Where(x => x.Used == false && x.Mandatory == false);
+                        foreach (var option in unusedMandatoryOptions) {
+                            input = option.TryParse(input, ref found);
+                            if (found) { break; }
+                        }
+                    }
+                }
+            }
 
+            // check if any unused mandatory options exist, if yes => throw exception
+            var unusedMandatory = Options.Where(x => x.Used == false && x.Mandatory == true);
+            if (unusedMandatory.Count() > 0) {
+                throw new Exception($"can't execute command because unused mandatory parameter was not used: {unusedMandatory.First().Name}");
             }
 
             Execute();
         }
 
         public void Execute() { }
+
+        public string Help(bool showOptions = false, IList<string>? optionNames = null) { return ""; }
     }
 }

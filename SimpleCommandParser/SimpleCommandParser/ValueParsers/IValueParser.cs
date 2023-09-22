@@ -4,10 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SimpleCommandParser.ValueParser {
+namespace SimpleCommandParser.ValueParsers {
     internal interface IValueParser {
-        public bool TryParse(IEnumerable<string> values);
-
-        public bool TryParseList(IEnumerable<string> values);
+        public string TryParse(string value, bool success);
     }
 }

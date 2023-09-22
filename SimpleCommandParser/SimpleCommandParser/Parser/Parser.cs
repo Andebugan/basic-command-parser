@@ -23,7 +23,7 @@ namespace SimpleCommandParser {
             if (cmds is null || cmds.Count() == 0)
                 throw new Exception("command doesn't exist");
 
-            cmds.First().Parse(input.Remove(0, cmd.First().Length));
+            cmds.First().Parse(input);
         }
     }
 }

@@ -13,5 +13,6 @@ namespace SimpleCommandParser {
         public void Clear();
         public void Parse(string param);
         public void Execute();
+        public string Help(bool showOptions = false, IList<string>? optionNames = null);
     }
 }
