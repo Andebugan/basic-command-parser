@@ -6,6 +6,10 @@ using System.Threading.Tasks;
 
 namespace SimpleCommandParser.ValueParsers {
     internal class ValueParsingConfig {
+        public string ListTerminator { get; set; } = "|.";
+
+        public string ListSeparator { get; set; } = "|";
+
         public Dictionary<string, bool>  boolFormats { get; set; } = new Dictionary<string, bool> {
             {"t", true},
             {"true", true},

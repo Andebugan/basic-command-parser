@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace SimpleCommandParser {
-    internal class Option {
+    internal class Program {
+        static void Main(string[] args) {
+        }
     }
 }

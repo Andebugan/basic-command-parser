@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SimpleCommandParser {
-    internal class Option {
+namespace SimpleCommandParser.DefaultCommands {
+    internal class VersionCommand {
     }
 }
