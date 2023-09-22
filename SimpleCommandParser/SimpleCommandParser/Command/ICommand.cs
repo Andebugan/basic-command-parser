@@ -8,11 +8,10 @@ namespace SimpleCommandParser {
     internal interface ICommand {
         public string Name { get; set; }
         public string Description { get; set; }
-        public IEnumerable<IOption> Options { get; set; }
+        public IEnumerable<ICommandOption> Options { get; set; }
 
         public void Clear();
         public void Parse(string param);
         public void Execute();
-        public string Help(bool showOptions = false, IList<string>? optionNames = null);
     }
 }

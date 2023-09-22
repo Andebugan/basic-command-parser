@@ -8,9 +8,9 @@ namespace SimpleCommandParser {
     internal class Command : ICommand {
         public string Name { get; set; }
         public string Description { get; set; }
-        public IEnumerable<IOption> Options { get; set; }
+        public IEnumerable<ICommandOption> Options { get; set; }
 
-        public Command(string name, string description, IEnumerable<IOption> options) {
+        public Command(string name, string description, IEnumerable<ICommandOption> options) {
             Name = name;
             Description = description;
             Options = options;
@@ -30,8 +30,6 @@ namespace SimpleCommandParser {
                 throw new Exception("command parameters are empty");
             }
 
-            // phase one - parse all explicitly stated options
-
             var options = paramTrimmed.Split(SpecialSymbolsConfig.OptionDelimeter).ToList();
 
             while (options.Count() > 0) {
@@ -40,34 +38,14 @@ namespace SimpleCommandParser {
 
                 var op = Options.Where(x => x.Name == optionName);
 
-                if (op.Count() == 0 && options.Count() > 1)
+                if (op.Count() == 0)
                     throw new Exception("unknown option");
 
-                op.First().Parse(input);
+                var option = op.First();
+
+                option.Parse(input);
 
                 options.RemoveAt(0);
-            }
-
-            // phase two - parse all other unused options, mandatory first, then others in the order they appear in the options list
-            bool found;
-            if (options.Count() > 0) {
-                while (input.Length > 0) {
-                    found = false;
-                    var unusedMandatoryOptions = Options.Where(x => x.Used == false && x.Mandatory == true);
-                    if (unusedMandatoryOptions.Count() > 0) {
-                        foreach (var option in unusedMandatoryOptions) {
-                            input = option.TryParse(input, ref found);
-                            if (found) { break; }
-                        }
-                    }
-                    else {
-                        var unusedOptions = Options.Where(x => x.Used == false && x.Mandatory == false);
-                        foreach (var option in unusedMandatoryOptions) {
-                            input = option.TryParse(input, ref found);
-                            if (found) { break; }
-                        }
-                    }
-                }
             }
 
             // check if any unused mandatory options exist, if yes => throw exception
@@ -75,11 +53,13 @@ namespace SimpleCommandParser {
             if (unusedMandatory.Count() > 0) {
                 throw new Exception($"can't execute command because unused mandatory parameter was not used: {unusedMandatory.First().Name}");
             }
-
-            Execute();
         }
 
-        public void Execute() { }
+        public void Execute() {
+            foreach (var op in Options.Where(x => x.Used)) {
+                op.Execute();
+            }
+        }
 
         public string Help(bool showOptions = false, IList<string>? optionNames = null) { return ""; }
     }
