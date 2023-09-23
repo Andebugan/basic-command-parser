@@ -10,17 +10,6 @@ namespace SimpleCommandParser.ValueParsers {
 
         public string ListSeparator { get; set; } = "|";
 
-        public Dictionary<string, bool>  boolFormats { get; set; } = new Dictionary<string, bool> {
-            {"t", true},
-            {"true", true},
-            {"y", true},
-            {"yes", true},
-            {"f", false},
-            {"false", false},
-            {"n", false},
-            {"no", false}
-        };
-
         public List<string> datetimeFormats { get; set; } = new List<string> {
             "yyyy",
             "d.M.yyyy",
