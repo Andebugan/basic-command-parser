@@ -1,19 +1,23 @@
-﻿using System;
+﻿using SimpleCommandParser.Command;
+using SimpleCommandParser.Option;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace SimpleCommandParser {
-    internal class Command : ICommand {
+    internal class CommandParser : ICommandParser {
         public string Name { get; set; }
         public string Description { get; set; }
-        public IEnumerable<ICommandOption> Options { get; set; }
+        public IEnumerable<ICommandOptionParser> Options { get; set; }
+        public ICommand Command { get; set; }
 
-        public Command(string name, string description, IEnumerable<ICommandOption> options) {
+        public CommandParser(string name, string description, IEnumerable<ICommandOptionParser> options, ICommand command) {
             Name = name;
             Description = description;
             Options = options;
+            Command = command;
         }
 
         public void Clear() {
@@ -22,7 +26,7 @@ namespace SimpleCommandParser {
             }
         }
 
-        public void Parse(string input) {
+        public ICommand Parse(string input) {
             input = input.Remove(0, input.IndexOf(Name) + Name.Length);
 
             var paramTrimmed = input.Trim();
@@ -31,6 +35,8 @@ namespace SimpleCommandParser {
             }
 
             var options = paramTrimmed.Split(SpecialSymbolsConfig.OptionDelimeter).ToList();
+
+            List<IOption> cmdOptions = new List<IOption>();
 
             while (options.Count() > 0) {
                 string optionName = options.First().Split().First();
@@ -43,7 +49,11 @@ namespace SimpleCommandParser {
 
                 var option = op.First();
 
-                option.Parse(input);
+                IOption parsedOption;
+
+                option.Parse(options.First(), out parsedOption);
+
+                cmdOptions.Add(parsedOption);
 
                 options.RemoveAt(0);
             }
@@ -53,12 +63,8 @@ namespace SimpleCommandParser {
             if (unusedMandatory.Count() > 0) {
                 throw new Exception($"can't execute command because unused mandatory parameter was not used: {unusedMandatory.First().Name}");
             }
-        }
 
-        public void Execute() {
-            foreach (var op in Options.Where(x => x.Used)) {
-                op.Execute();
-            }
+            return Command.ApplyOptions(cmdOptions);
         }
 
         public string Help(bool showOptions = false, IList<string>? optionNames = null) { return ""; }

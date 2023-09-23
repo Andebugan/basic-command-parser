@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SimpleCommandParser.Command;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,23 +8,23 @@ using System.Threading.Tasks;
 namespace SimpleCommandParser {
     internal class Parser : IParser {
 
-        public IEnumerable<ICommand> Commands { get; set; }
+        public IList<ICommandParser> CommandParsers { get; set; }
 
-        public Parser(IEnumerable<ICommand> commands) {
-            Commands = commands;
+        public Parser(IList<ICommandParser> commandParsers) {
+            CommandParsers = commandParsers;
         }
 
-        public void Parse(string input) {
+        public ICommand Parse(string input) {
             var cmd = input.Trim().Split();
             if (cmd is null || cmd.Length == 0)
                 throw new Exception("no command detected");
 
-            var cmds = Commands.Where(x => x.Name == cmd.First());
+            var parsers = CommandParsers.Where(x => x.Name == cmd.First());
 
-            if (cmds is null || cmds.Count() == 0)
+            if (parsers.Count() == 0)
                 throw new Exception("command doesn't exist");
 
-            cmds.First().Parse(input);
+            return parsers.First().Parse(input);
         }
     }
 }

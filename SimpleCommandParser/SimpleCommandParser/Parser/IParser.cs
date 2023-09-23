@@ -1,12 +1,13 @@
-﻿using System;
+﻿using SimpleCommandParser.Command;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
 namespace SimpleCommandParser {
     internal interface IParser {
-        public IEnumerable<ICommand> Commands { get; set; }
+        public IList<ICommandParser> CommandParsers { get; set; }
 
-        public void Parse(string input);
+        public ICommand Parse(string input);
     }
 }
