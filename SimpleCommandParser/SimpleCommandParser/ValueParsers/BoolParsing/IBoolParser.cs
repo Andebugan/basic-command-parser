@@ -6,6 +6,6 @@ using System.Threading.Tasks;
 
 namespace SimpleCommandParser.ValueParsers {
     public interface IBoolParser {
-        public bool Parse(ref IList<string> value);
+        public bool Parse(ref IList<string> input);
     }
 }

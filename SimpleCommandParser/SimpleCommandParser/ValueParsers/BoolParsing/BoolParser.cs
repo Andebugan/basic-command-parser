@@ -17,18 +17,18 @@ namespace SimpleCommandParser.ValueParsers.BoolParsing {
             {"no", false}
         };
 
-        public bool Parse(ref IList<string> value) {
-            if (value.Count() == 0) {
+        public bool Parse(ref IList<string> input) {
+            if (input.Count() == 0) {
                 return true;
             }
 
-            var parsedVal = value.First();
+            var parsedVal = input.First();
 
             if (!boolFormats.Keys.Contains(parsedVal)) {
                 throw new Exception($"unknown value while parser bool option: {parsedVal}");
             }
 
-            value.RemoveAt(0);
+            input.RemoveAt(0);
 
             return boolFormats[parsedVal];
         }

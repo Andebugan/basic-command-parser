@@ -8,18 +8,7 @@ namespace SimpleCommandParser.ValueParsers.BoolParsing {
     public class BoolListParser: IBoolListParser {
         public string ListTerminator { get; set; } = "|.";
 
-        public Dictionary<string, bool> boolFormats { get; set; } = new Dictionary<string, bool> {
-            {"t", true},
-            {"true", true},
-            {"y", true},
-            {"yes", true},
-            {"f", false},
-            {"false", false},
-            {"n", false},
-            {"no", false}
-        };
-
-        public IList<bool> Parse(ref IList<string> input, int cnt = -1) {
+        public IList<bool> Parse(ref IList<string> input, IBoolParser boolParser, int cnt = -1) {
             if (input.Count() == 0)
                 return new List<bool>();
 
@@ -31,11 +20,7 @@ namespace SimpleCommandParser.ValueParsers.BoolParsing {
                     return list;
                 }
 
-                if (!boolFormats.ContainsKey(input.First()))
-                    throw new Exception($"unknown value while parser bool list: {input.First()}");
-
-                list.Add(boolFormats[input.First()]);
-                input.RemoveAt(0);
+                list.Add(boolParser.Parse(ref input));
             }
 
             return list;
