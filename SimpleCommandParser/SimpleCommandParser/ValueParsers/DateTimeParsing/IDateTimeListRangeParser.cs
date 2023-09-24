@@ -6,6 +6,6 @@ using System.Threading.Tasks;
 
 namespace SimpleCommandParser.ValueParsers.DateTimeParsing {
     internal interface IDateTimeListRangeParser {
-        public IList<IDateTimeRange> Parse(ref IList<string> input);
+        public IList<DateTimeRange> Parse(ref IList<string> input, IDateTimeRangeParser dateTimeRangeParser, IDateTimeParser dateTimeParser);
     }
 }

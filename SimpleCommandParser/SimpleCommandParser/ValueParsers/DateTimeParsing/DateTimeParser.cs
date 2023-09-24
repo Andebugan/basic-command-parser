@@ -8,6 +8,8 @@ using System.Threading.Tasks;
 namespace SimpleCommandParser.ValueParsers.DateTimeParsing {
     internal class DateTimeParser : IDateTimeParser {
         DateFormats dateFormats;
+
+        private string stopper = ",";
         
         public DateTimeParser(DateFormats dateFormats) {
             this.dateFormats = dateFormats;
@@ -24,6 +26,14 @@ namespace SimpleCommandParser.ValueParsers.DateTimeParsing {
             // try parse time
             success = DateTime.TryParseExact(value.First(), "h:m", System.Globalization.CultureInfo.CurrentCulture,
                 System.Globalization.DateTimeStyles.AssumeLocal, out time);
+            
+
+            if (success && (value.Count() == 0 || value.First().EndsWith(stopper))) {
+                value.RemoveAt(0);
+                var tmp = DateTime.Now;
+                return new DateTime(tmp.Year, tmp.Month, tmp.Day, time.Hour, time.Minute, 0);
+            }
+
             if (success) {
                 value.RemoveAt(0);
             }
@@ -84,7 +94,6 @@ namespace SimpleCommandParser.ValueParsers.DateTimeParsing {
 
             // time only, return current 
             date = DateTime.Now;
-            value.RemoveAt(0);
             return new DateTime(date.Year, date.Month, date.Day, time.Hour, time.Minute, 0);
         }
     }
