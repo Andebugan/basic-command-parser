@@ -5,6 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace SimpleCommandParser.ValueParsers.StringParsing {
-    internal class StringListParser {
+    internal interface IStringParser {
     }
 }
