@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 
 namespace SimpleCommandParser {
-    internal interface IParser {
+    public interface IParser {
         public IList<ICommandParser> CommandParsers { get; set; }
 
         public ICommand Parse(string input);

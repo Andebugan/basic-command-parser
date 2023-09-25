@@ -5,6 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace SimpleCommandParser.Option {
-    internal interface IOption {
+    public interface IOption {
     }
 }

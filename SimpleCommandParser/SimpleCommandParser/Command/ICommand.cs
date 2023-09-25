@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace SimpleCommandParser.Command {
-    internal interface ICommand {
+    public interface ICommand {
         public ICommand ApplyOptions(IList<IOption> options);
     }
 }

@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace SimpleCommandParser {
-    internal interface ICommandOptionParser {
+    public interface ICommandOptionParser {
 
         public string Name { get; set; }
         public string Description { get; set; }

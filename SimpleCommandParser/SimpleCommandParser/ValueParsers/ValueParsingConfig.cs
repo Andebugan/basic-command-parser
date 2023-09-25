@@ -5,9 +5,12 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace SimpleCommandParser.ValueParsers {
-    internal class ValueParsingConfig {
-        public string ListTerminator { get; set; } = "|.";
+    public struct ValueParsingConfig {
+        public string ListTerminator = "|.";
 
-        public string ListSeparator { get; set; } = "|";
+        public string ListSeparator = "|";
+
+        public ValueParsingConfig() {
+        }
     }
 }

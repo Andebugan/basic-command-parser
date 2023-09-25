@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace SimpleCommandParser {
-    internal class Parser : IParser {
+    public class Parser : IParser {
 
         public IList<ICommandParser> CommandParsers { get; set; }
 

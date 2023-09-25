@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace SimpleCommandParser.ValueParsers.BoolParsing {
-    internal class BoolParser : IBoolParser {
+    public class BoolParser : IBoolParser {
         public Dictionary<string, bool> boolFormats { get; set; } = new Dictionary<string, bool> {
             {"t", true},
             {"true", true},
@@ -31,6 +31,24 @@ namespace SimpleCommandParser.ValueParsers.BoolParsing {
             input.RemoveAt(0);
 
             return boolFormats[parsedVal];
+        }
+
+        public IList<bool> Parse(ref IList<string> input, ValueParsingConfig valueParsingConfig) {
+            if (input.Count() == 0)
+                return new List<bool>();
+
+            var list = new List<bool>();
+
+            while (input.Count() > 0) {
+                if (input.First() == valueParsingConfig.ListTerminator) {
+                    input.RemoveAt(0);
+                    return list;
+                }
+
+                list.Add(Parse(ref input));
+            }
+
+            return list;
         }
     }
 }
