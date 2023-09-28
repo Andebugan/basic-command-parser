@@ -10,7 +10,7 @@ namespace SimpleCommandParser.ValueParsers.FloatParsing {
 
         public float Parse(ref IList<string> input) {
             if (input.Count() == 0)
-                throw new Exception("can't parse float value: no value detected");
+                return 0.0f;
 
             float result;
             if (!float.TryParse(input.First(), out result))
