@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace SimpleCommandParser.ValueParsers.FloatParsing {
-    internal class FloatParser : IFloatParser {
+    public class FloatParser : IFloatParser {
 
         public float Parse(ref IList<string> input) {
             if (input.Count() == 0)

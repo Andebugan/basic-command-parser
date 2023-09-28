@@ -6,7 +6,7 @@
             this.End = end;
         }
 
-        DateTime Start;
-        DateTime End;
+        public DateTime Start;
+        public DateTime End;
     }
 }

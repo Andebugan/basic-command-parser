@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace SimpleCommandParser.ValueParsers.DateTimeParsing {
-    internal class DateTimeParser : IDateTimeParser {
+    public class DateTimeParser : IDateTimeParser {
         DateFormats dateFormats;
 
         private string stopper = ",";
@@ -24,7 +24,7 @@ namespace SimpleCommandParser.ValueParsers.DateTimeParsing {
 
             bool success = false;
             // try parse time
-            success = DateTime.TryParseExact(input.First(), "h:m", System.Globalization.CultureInfo.CurrentCulture,
+            success = DateTime.TryParseExact(input.First(), "H:m", System.Globalization.CultureInfo.CurrentCulture,
                 System.Globalization.DateTimeStyles.AssumeLocal, out time);
             
 
@@ -118,7 +118,7 @@ namespace SimpleCommandParser.ValueParsers.DateTimeParsing {
 
         public DateTimeRange ParseRange(ref IList<string> input) {
             if (input.Count() == 0) {
-                throw new Exception("cannot parse datetime range, no value detected");
+                return new DateTimeRange(DateTime.MinValue, DateTime.MaxValue);
             }
 
             DateTime start;
@@ -141,6 +141,10 @@ namespace SimpleCommandParser.ValueParsers.DateTimeParsing {
 
             start = Parse(ref input);
             end = Parse(ref input);
+
+            if (start > end) {
+                throw new Exception($"incorrect datetime range value, start can't be greater then end: {start}, {end}");
+            }
 
             return new DateTimeRange(start, end);
         }

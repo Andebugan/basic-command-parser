@@ -5,12 +5,18 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace SimpleCommandParser.ValueParsers.DateTimeParsing {
-    internal class DateFormats {
+    public struct DateFormats {
+
         public List<string> dateFormats { get; set; } = new List<string> {
             "yyyy",
+            "M.yy",
+            "MM.yy",
+            "d.M.yy",
+            "dd.MM.yy",
+            "M.yyyy",
+            "MM.yyyy",
             "d.M.yyyy",
             "dd.MM.yyyy",
-            "d",
             "d.M",
             "d.MM",
         };
@@ -37,5 +43,7 @@ namespace SimpleCommandParser.ValueParsers.DateTimeParsing {
             { "tomorrow", DateTime.Today.AddDays(1)},
             { "today", DateTime.Today}
         };
+
+        public DateFormats() { }
     }
 }
