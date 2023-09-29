@@ -16,7 +16,7 @@ namespace SimpleCommandParser.ValueParsers.StringParsing {
             return result;
         }
 
-        public IList<string> Parse(IList<string> input, ValueParsingConfig valueParsingConfig) {
+        public IList<string> Parse(ref IList<string> input, ValueParsingConfig valueParsingConfig) {
             if (input.Count() == 0)
                 return new List<string>();
 

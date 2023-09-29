@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace SimpleCommandParser.ValueParsers.StringParsing {
-    internal interface IStringParser {
+    public interface IStringParser {
+        public string Parse(ref IList<string> input);
+        public IList<string> Parse(ref IList<string> input, ValueParsingConfig valueParsingConfig);
     }
 }
