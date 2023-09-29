@@ -12,6 +12,8 @@ namespace SimpleCommandParser.ValueParsers.FloatParsing {
             if (input.Count() == 0)
                 return 0.0f;
 
+            input[0] = input[0].Replace('.', ',');
+
             float result;
             if (!float.TryParse(input.First(), out result))
                 throw new Exception($"can't parse float value due to incorrect format: {input.First()}");
@@ -33,7 +35,6 @@ namespace SimpleCommandParser.ValueParsers.FloatParsing {
                 }
 
                 result.Add(Parse(ref input));
-                input.RemoveAt(0);
             }
 
             return result;
@@ -43,13 +44,19 @@ namespace SimpleCommandParser.ValueParsers.FloatParsing {
             float start;
             float end;
 
+            if (input.Count() == 0) {
+                start = float.NegativeInfinity;
+                end = float.PositiveInfinity;
+                return new FloatRange(start, end);
+            }
+
             // try parse > or <
             if (input.First()[0] == '<') {
-                input[0] = input[0].Remove('<');
+                input[0] = input[0].Replace("<", "");
                 end = Parse(ref input);
                 return new FloatRange(float.NegativeInfinity, end);
             } else if (input.First()[0] == '>') {
-                input[0] = input[0].Remove('>');
+                input[0] = input[0].Replace(">", "");
                 start = Parse(ref input);
                 return new FloatRange(start, float.PositiveInfinity);
             }
@@ -77,7 +84,6 @@ namespace SimpleCommandParser.ValueParsers.FloatParsing {
                 }
 
                 result.Add(ParseRange(ref input));
-                input.RemoveAt(0);
             }
 
             return result;

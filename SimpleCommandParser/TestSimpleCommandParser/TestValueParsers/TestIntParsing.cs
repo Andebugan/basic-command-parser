@@ -55,7 +55,7 @@ namespace TestSimpleCommandParser.TestValueParsers {
             var result = parser.Parse(ref inputLst, new ValueParsingConfig());
 
             // Assert
-            Assert.Equal(expected, result);
+            Assert.Equal(expected.ToList(), result);
         }
 
         public static IEnumerable<object[]> TestIntRangeListData() {

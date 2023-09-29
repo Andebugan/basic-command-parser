@@ -7,6 +7,13 @@ using System.Threading.Tasks;
 namespace SimpleCommandParser.ValueParsers.DateTimeParsing {
     public struct DateFormats {
 
+        public List<string> timeFormats { get; set; } = new List<string> {
+            "H:m",
+            "HH:m",
+            "H:mm",
+            "HH:mm"
+        };
+
         public List<string> dateFormats { get; set; } = new List<string> {
             "yyyy",
             "M.yy",
@@ -17,11 +24,12 @@ namespace SimpleCommandParser.ValueParsers.DateTimeParsing {
             "MM.yyyy",
             "d.M.yyyy",
             "dd.MM.yyyy",
-            "d.M",
-            "d.MM",
+            "d.M"
         };
 
         public Dictionary<string, DayOfWeek> dayOfWeekTextFormat { get; set; } = new Dictionary<string, DayOfWeek> {
+            { "sun", DayOfWeek.Sunday },
+            { "sunday", DayOfWeek.Sunday },
             { "mon", DayOfWeek.Monday },
             { "monday", DayOfWeek.Monday },
             { "tue", DayOfWeek.Tuesday },
@@ -33,9 +41,7 @@ namespace SimpleCommandParser.ValueParsers.DateTimeParsing {
             { "fri", DayOfWeek.Friday },
             { "friday", DayOfWeek.Friday },
             { "sat", DayOfWeek.Saturday },
-            { "saturday", DayOfWeek.Saturday },
-            { "sun", DayOfWeek.Sunday },
-            { "sunday", DayOfWeek.Sunday }
+            { "saturday", DayOfWeek.Saturday }
         };
 
         public Dictionary<string, DateTime> specialDayTextFormat { get; set; } = new Dictionary<string, DateTime> {

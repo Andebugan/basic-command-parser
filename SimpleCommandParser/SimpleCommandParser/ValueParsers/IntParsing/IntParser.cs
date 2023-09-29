@@ -32,7 +32,6 @@ namespace SimpleCommandParser.ValueParsers.IntParsing {
                 }
 
                 result.Add(Parse(ref input));
-                input.RemoveAt(0);
             }
 
             return result;
@@ -44,11 +43,11 @@ namespace SimpleCommandParser.ValueParsers.IntParsing {
 
             // try parse > or <
             if (input.First()[0] == '<') {
-                input[0] = input[0].Remove('<');
+                input[0] = input[0].Replace("<", "");
                 end = Parse(ref input);
                 return new IntRange(int.MinValue, end);
             } else if (input.First()[0] == '>') {
-                input[0] = input[0].Remove('>');
+                input[0] = input[0].Replace(">", "");
                 start = Parse(ref input);
                 return new IntRange(start, int.MaxValue);
             }
@@ -76,7 +75,6 @@ namespace SimpleCommandParser.ValueParsers.IntParsing {
                 }
 
                 result.Add(ParseRange(ref input));
-                input.RemoveAt(0);
             }
 
             return result;

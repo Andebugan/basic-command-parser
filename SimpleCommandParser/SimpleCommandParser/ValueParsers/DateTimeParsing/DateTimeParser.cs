@@ -23,10 +23,16 @@ namespace SimpleCommandParser.ValueParsers.DateTimeParsing {
             var time = new DateTime();
 
             bool success = false;
+
+            var tmpTime = input.First();
+            if (tmpTime.EndsWith(stopper))
+                tmpTime = tmpTime.Remove(tmpTime.Length - 1);
             // try parse time
-            success = DateTime.TryParseExact(input.First(), "H:m", System.Globalization.CultureInfo.CurrentCulture,
-                System.Globalization.DateTimeStyles.AssumeLocal, out time);
-            
+            foreach (var tFormat in dateFormats.timeFormats) {
+                if (success = DateTime.TryParseExact(tmpTime, tFormat, System.Globalization.CultureInfo.CurrentCulture,
+                System.Globalization.DateTimeStyles.AssumeLocal, out time))
+                    break;
+            }
 
             if (success && (input.Count() == 0 || input.First().EndsWith(stopper))) {
                 input.RemoveAt(0);
@@ -62,6 +68,10 @@ namespace SimpleCommandParser.ValueParsers.DateTimeParsing {
 
                 input.RemoveAt(0);
                 date = date.AddDays(dayOfWeek - date.DayOfWeek + 7);
+
+                if (date.DayOfWeek == DayOfWeek.Sunday)
+                    date = date.AddDays(7);
+
                 return new DateTime(date.Year, date.Month, date.Day, time.Hour, time.Minute, 0);
 
             }
@@ -75,13 +85,22 @@ namespace SimpleCommandParser.ValueParsers.DateTimeParsing {
 
                 input.RemoveAt(0);
                 date = date.AddDays(dayOfWeek - date.DayOfWeek - 7);
+
+                if (date.DayOfWeek == DayOfWeek.Sunday)
+                    date = date.AddDays(7);
                 return new DateTime(date.Year, date.Month, date.Day, time.Hour, time.Minute, 0);
             }
             else if (dateFormats.dayOfWeekTextFormat.ContainsKey(input.First())) {
                 var dayOfWeek = dateFormats.dayOfWeekTextFormat[input.First()];
 
+                date = DateTime.Now;
+
                 input.RemoveAt(0);
                 date = date.AddDays(dayOfWeek - date.DayOfWeek);
+
+                if (date.DayOfWeek == DayOfWeek.Sunday)
+                    date = date.AddDays(7);
+
                 return new DateTime(date.Year, date.Month, date.Day, time.Hour, time.Minute, 0);
             }
 
@@ -126,11 +145,11 @@ namespace SimpleCommandParser.ValueParsers.DateTimeParsing {
 
             // try parse > or <
             if (input.First()[0] == '<') {
-                input[0] = input[0].Remove('<');
+                input[0] = input[0].Replace("<", "");
                 end = Parse(ref input);
                 return new DateTimeRange(DateTime.MinValue, end);
             } else if (input.First()[0] == '>') {
-                input[0] = input[0].Remove('>');
+                input[0] = input[0].Replace(">", "");
                 start = Parse(ref input);
                 return new DateTimeRange(start, DateTime.MaxValue);
             }
@@ -162,7 +181,6 @@ namespace SimpleCommandParser.ValueParsers.DateTimeParsing {
                 }
 
                 result.Add(ParseRange(ref input));
-                input.RemoveAt(0);
             }
 
             return result;

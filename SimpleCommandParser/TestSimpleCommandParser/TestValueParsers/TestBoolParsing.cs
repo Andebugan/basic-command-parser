@@ -86,9 +86,9 @@ namespace TestSimpleCommandParser.TestValueParsers {
 
         [Theory]
         [InlineData(new string[] { "|." }, new bool[] { }, new string[] { })]
-        [InlineData(new string[] { "y", "n", "|." }, new bool[] { }, new string[] { })]
-        [InlineData(new string[] { "|.", "test" }, new bool[] { }, new string[] { })]
-        [InlineData(new string[] { "y", "n", "|.", "test" }, new bool[] { }, new string[] { })]
+        [InlineData(new string[] { "y", "n", "|." }, new bool[] { true, false }, new string[] { })]
+        [InlineData(new string[] { "|.", "test" }, new bool[] { }, new string[] { "test" })]
+        [InlineData(new string[] { "y", "n", "|.", "test" }, new bool[] { true, false }, new string[] { "test" })]
         public void TestListValueParsings(string[] input, bool[] expected, string[] inputExpected) {
             // Arrange
             IList<string> inputLst = input.ToList();

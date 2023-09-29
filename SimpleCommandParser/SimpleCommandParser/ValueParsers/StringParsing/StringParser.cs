@@ -24,16 +24,20 @@ namespace SimpleCommandParser.ValueParsers.StringParsing {
 
             var tmp = new StringBuilder();
 
-            while (input.Count() > 0) {
+            var str = "";
 
+            while (input.Count() > 0) {
                 if (input.First() == valueParsingConfig.ListTerminator) {
                     input.RemoveAt(0);
-                    result.Add(tmp.ToString());
+                    str = str.Remove(str.Length - 1);
+                    result.Add(str);
                     return result;
                 }
 
                 if (input.First() == valueParsingConfig.ListSeparator) {
-                    result.Add(tmp.ToString());
+                    str = tmp.ToString();
+                    str = str.Remove(str.Length - 1);
+                    result.Add(str);
                     tmp.Clear();
                 }
                 else {
@@ -42,6 +46,11 @@ namespace SimpleCommandParser.ValueParsers.StringParsing {
 
                 input.RemoveAt(0);
             }
+
+
+            str = tmp.ToString();
+            str = str.Remove(str.Length - 1);
+            result.Add(str);
 
             return result;
         }
