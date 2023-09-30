@@ -10,10 +10,10 @@ namespace SimpleCommandParser {
     public class CommandParser : ICommandParser {
         public string Name { get; set; }
         public string Description { get; set; }
-        public IEnumerable<ICommandOptionParser> Options { get; set; }
+        public IList<ICommandOptionParser> Options { get; set; }
         public ICommand Command { get; set; }
 
-        public CommandParser(string name, string description, IEnumerable<ICommandOptionParser> options, ICommand command) {
+        public CommandParser(string name, string description, IList<ICommandOptionParser> options, ICommand command) {
             Name = name;
             Description = description;
             Options = options;
@@ -66,7 +66,5 @@ namespace SimpleCommandParser {
 
             return Command.ApplyOptions(cmdOptions);
         }
-
-        public string Help(bool showOptions = false, IList<string>? optionNames = null) { return ""; }
     }
 }

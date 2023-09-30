@@ -10,7 +10,7 @@ namespace SimpleCommandParser {
     public interface ICommandParser {
         public string Name { get; set; }
         public string Description { get; set; }
-        public IEnumerable<ICommandOptionParser> Options { get; set; }
+        public IList<ICommandOptionParser> Options { get; set; }
         public ICommand Command { get; set; }
 
         public void Clear();
