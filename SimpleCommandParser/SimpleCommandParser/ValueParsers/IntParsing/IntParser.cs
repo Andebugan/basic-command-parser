@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace SimpleCommandParser.ValueParsers.IntParsing {
     public class IntParser {
+        public string ValueTypeName { get; } = "int";
         public int Parse(ref IList<string> input) {
             if (input.Count() == 0)
                 throw new Exception("can't parse integer value: no value detected");

@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace SimpleCommandParser {
-    abstract class CommandOptionParser : ICommandOptionParser {
+    public abstract class CommandOptionParser : ICommandOptionParser {
         public string Name { get; set; }
         public string Description { get; set; }
         public bool Mandatory { get; set; }
@@ -53,5 +53,10 @@ namespace SimpleCommandParser {
         }
 
         public abstract IOption ParseOption(string input);
+
+
+        public abstract string[] GetUsage(bool colored);
+
+        public abstract string[] GetFormats(bool colored);
     }
 }

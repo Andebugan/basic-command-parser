@@ -10,7 +10,9 @@ namespace SimpleCommandParser.ValueParsers.DateTimeParsing {
         DateFormats dateFormats;
 
         private string stopper = ",";
-        
+
+        public string ValueTypeName { get; } = "datetime";
+
         public DateTimeParser(DateFormats dateFormats) {
             this.dateFormats = dateFormats;
         }

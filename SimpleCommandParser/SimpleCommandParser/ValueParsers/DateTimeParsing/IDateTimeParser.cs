@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace SimpleCommandParser.ValueParsers.DateTimeParsing {
-    public interface IDateTimeParser {
+    public interface IDateTimeParser : IValueParser {
         public DateTime Parse(ref IList<string> input);
 
         public IList<DateTime> Parse(ref IList<string> input, ValueParsingConfig valueParsingConfig);

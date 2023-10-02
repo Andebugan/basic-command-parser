@@ -1,5 +1,5 @@
 ﻿namespace SimpleCommandParser.ValueParsers.FloatParsing {
-    public interface IFloatParser {
+    public interface IFloatParser : IValueParser {
         public float Parse(ref IList<string> input);
 
         public IList<float> Parse(ref IList<string> input, ValueParsingConfig valueParsingConfig);

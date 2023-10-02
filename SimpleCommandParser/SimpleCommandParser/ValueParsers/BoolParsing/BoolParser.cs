@@ -16,6 +16,7 @@ namespace SimpleCommandParser.ValueParsers.BoolParsing {
             {"n", false},
             {"no", false}
         };
+        public string ValueTypeName { get; } = "bool";
 
         public bool Parse(ref IList<string> input) {
             if (input.Count() == 0) {

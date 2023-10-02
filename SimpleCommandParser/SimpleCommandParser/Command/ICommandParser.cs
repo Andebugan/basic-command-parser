@@ -15,5 +15,7 @@ namespace SimpleCommandParser {
 
         public void Clear();
         public ICommand Parse(string input);
+
+        public string GetUsage(bool colored = false);
     }
 }

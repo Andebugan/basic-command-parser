@@ -26,4 +26,8 @@
     <ProjectReference Include="..\SimpleCommandParser\SimpleCommandParser.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="TestCommandParser\" />
+  </ItemGroup>
+
 </Project>

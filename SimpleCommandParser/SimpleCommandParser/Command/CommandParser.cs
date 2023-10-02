@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace SimpleCommandParser {
-    public class CommandParser : ICommandParser {
+    public abstract class CommandParser : ICommandParser {
         public string Name { get; set; }
         public string Description { get; set; }
         public IList<ICommandOptionParser> Options { get; set; }
@@ -66,5 +66,7 @@ namespace SimpleCommandParser {
 
             return Command.ApplyOptions(cmdOptions);
         }
+
+        public abstract string GetUsage(bool colored = false);
     }
 }

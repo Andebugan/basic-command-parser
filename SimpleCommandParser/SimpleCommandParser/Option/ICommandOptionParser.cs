@@ -16,5 +16,9 @@ namespace SimpleCommandParser {
         public string Parse(string input, out IOption option);
         public IOption ParseOption(string input);
         public void Clear();
+
+        public string[] GetUsage(bool colored = false);
+
+        public string[] GetFormats(bool colored = false);
     }
 }

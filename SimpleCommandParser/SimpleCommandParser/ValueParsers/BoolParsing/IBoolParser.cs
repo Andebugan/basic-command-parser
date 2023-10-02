@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace SimpleCommandParser.ValueParsers {
-    public interface IBoolParser {
+    public interface IBoolParser: IValueParser {
         public bool Parse(ref IList<string> input);
 
         public IList<bool> Parse(ref IList<string> input, ValueParsingConfig valueParsingConfig);

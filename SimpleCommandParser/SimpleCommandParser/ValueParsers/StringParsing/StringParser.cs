@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 
 namespace SimpleCommandParser.ValueParsers.StringParsing {
     public class StringParser {
+        public string ValueTypeName { get; } = "string";
+
         public string Parse(ref IList<string> input) {
             if (input.Count() == 0)
                 return "";
