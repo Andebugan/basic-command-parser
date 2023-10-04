@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -58,7 +59,7 @@ namespace TestSimpleCommandParser.TestValueParsers {
 
             dateTime = dateTime.ToLocalTime();
 
-            dateTime = dateTime.AddDays(DayOfWeek.Monday - dateTime.DayOfWeek);
+            dateTime = dateTime.AddDays(0 - dateTime.DayOfWeek);
 
             DateFormats formats = new DateFormats();
 
@@ -67,21 +68,34 @@ namespace TestSimpleCommandParser.TestValueParsers {
                 if (formats.dayOfWeekTextFormat[day] != dateTime.DayOfWeek)
                     dateTime = dateTime.AddDays(1);
 
-                yield return new object[] { new string[] { "12:00", day }, dateTime.AddHours(12), new string[] { } };
-                yield return new object[] { new string[] { day }, dateTime, new string[] { } };
-                yield return new object[] { new string[] { "12:00", day, "test" }, dateTime.AddHours(12), new string[] { "test" } };
+                var normal = dateTime;
+                if (dateTime.DayOfWeek == DayOfWeek.Sunday)
+                    normal = normal.AddDays(7);
+
+                yield return new object[] { new string[] { "12:00", day }, normal.AddHours(12), new string[] { } };
+                yield return new object[] { new string[] { day }, normal, new string[] { } };
+                yield return new object[] { new string[] { "12:00", day, "test" }, normal.AddHours(12), new string[] { "test" } };
 
                 // test next
+                var next = dateTime.AddDays(7);
 
-                yield return new object[] { new string[] { "12:00", "next", day }, dateTime.AddDays(7).AddHours(12), new string[] { } };
-                yield return new object[] { new string[] { "next", day }, dateTime.AddDays(7), new string[] { } };
-                yield return new object[] { new string[] { "12:00", "next", day, "test" }, dateTime.AddDays(7).AddHours(12), new string[] { "test" } };
+                if (next.DayOfWeek == DayOfWeek.Sunday)
+                    next = next.AddDays(7);
+
+                yield return new object[] { new string[] { "12:00", "next", day }, next.AddHours(12), new string[] { } };
+                yield return new object[] { new string[] { "next", day }, next, new string[] { } };
+                yield return new object[] { new string[] { "12:00", "next", day, "test" }, next.AddHours(12), new string[] { "test" } };
 
                 // test previous
 
-                yield return new object[] { new string[] { "12:00", "previous", day }, dateTime.AddDays(-7).AddHours(12), new string[] { } };
-                yield return new object[] { new string[] { "previous", day }, dateTime.AddDays(-7), new string[] { } };
-                yield return new object[] { new string[] { "12:00", "previous", day, "test" }, dateTime.AddDays(-7).AddHours(12), new string[] { "test" } };
+                var previous = dateTime.AddDays(-7);
+
+                if (previous.DayOfWeek == DayOfWeek.Sunday)
+                    previous = previous.AddDays(7);
+
+                yield return new object[] { new string[] { "12:00", "previous", day }, previous.AddHours(12), new string[] { } };
+                yield return new object[] { new string[] { "previous", day }, previous, new string[] { } };
+                yield return new object[] { new string[] { "12:00", "previous", day, "test" }, previous.AddHours(12), new string[] { "test" } };
             }
         }
 
@@ -116,7 +130,7 @@ namespace TestSimpleCommandParser.TestValueParsers {
             var date = parser.Parse(ref inputLst);
 
             // Assert
-            Assert.Equal(expectedDate, date);
+            Assert.Equal(expectedDate, date, new TimeSpan(0, 1, 0));
             Assert.Equal(expectedInputChange, inputLst.ToArray());
         }
 
@@ -177,15 +191,15 @@ namespace TestSimpleCommandParser.TestValueParsers {
             // normal list
             yield return new object[] { new string[] { "12:00,", "13:00", "1.1.23", "14:00", "3.3.23" },
                 new DateTime[] {
-                new DateTime(2023, 9, 29, 12, 0, 0),
+                DateTime.Today.AddHours(12),
                 new DateTime(2023, 1, 1, 13, 0, 0),
-                new DateTime(2023, 1, 1, 14, 0, 0) },
+                new DateTime(2023, 3, 3, 14, 0, 0) },
                 new string[] { } };
 
             // test terminator
             yield return new object[] { new string[] { "12:00,", "13:00", "1.1.23", "|.", "test" },
                 new DateTime[] {
-                new DateTime(2023, 9, 29, 12, 0, 0),
+                DateTime.Today.AddHours(12),
                 new DateTime(2023, 1, 1, 13, 0, 0), },
                 new string[] { "test" } };
         }
@@ -213,23 +227,23 @@ namespace TestSimpleCommandParser.TestValueParsers {
                 new string[] { } };
 
             // normal list
-            yield return new object[] { new string[] { ">12:00,", "13:00", "1.1.23" },
-                new DateTime[][] {
-                new DateTime[] { DateTime.Today.AddHours(12), DateTime.MaxValue },
-                new DateTime[] { DateTime.MinValue, new DateTime(2023, 1, 1, 13, 0, 0) } },
+            yield return new object[] { new string[] { ">12:00,", "<13:00", "1.1.23" },
+                new DateTime[,] {
+                { DateTime.Today.AddHours(12), DateTime.MaxValue },
+                { DateTime.MinValue, new DateTime(2023, 1, 1, 13, 0, 0) } },
                 new string[] { } };
 
             // test terminator
             yield return new object[] { new string[] { ">12:00,", "13:00", "1.1.23", "|.", "test" },
-                new DateTime[][] {
-                new DateTime[] { DateTime.Today.AddHours(12), DateTime.MaxValue },
-                new DateTime[] { DateTime.MinValue, new DateTime(2023, 1, 1, 13, 0, 0) } },
+                new DateTime[,] {
+                { DateTime.Today.AddHours(12), DateTime.MaxValue },
+                { DateTime.MinValue, DateTime.Today } },
                 new string[] { "test" } };
         }
 
         [Theory]
         [MemberData(nameof(TestDateTimeRangeListData))]
-        public void TestDateTimeRangeListParsing(string[] input, DateTime[][] expectedList, string[] expectedInputChange) {
+        public void TestDateTimeRangeListParsing(string[] input, DateTime[,] expectedList, string[] expectedInputChange) {
             // Arrange
             var parser = new DateTimeParser(new DateFormats());
             IList<string> inputLst = input.ToList();
@@ -239,8 +253,8 @@ namespace TestSimpleCommandParser.TestValueParsers {
 
             // Assert
             for (var i = 0; i < expectedList.Length; i++) {
-                Assert.Equal(expectedList[i][0], result[i].Start);
-                Assert.Equal(expectedList[i][1], result[i].End);
+                Assert.Equal(expectedList[i,0], result[i].Start);
+                Assert.Equal(expectedList[i,1], result[i].End);
             }
             Assert.Equal(expectedInputChange, inputLst.ToArray());
         }

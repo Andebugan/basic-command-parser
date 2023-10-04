@@ -131,7 +131,6 @@ namespace SimpleCommandParser.ValueParsers.DateTimeParsing {
                 }
 
                 result.Add(Parse(ref input));
-                input.RemoveAt(0);
             }
 
             return result;
