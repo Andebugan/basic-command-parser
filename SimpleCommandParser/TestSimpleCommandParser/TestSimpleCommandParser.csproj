@@ -10,6 +10,7 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.3.2" />
+    <PackageReference Include="Moq" Version="4.20.69" />
     <PackageReference Include="xunit" Version="2.5.1" />
     <PackageReference Include="xunit.extensibility.core" Version="2.5.1" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.5.1">
@@ -24,10 +25,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\SimpleCommandParser\SimpleCommandParser.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="TestCommandParser\" />
   </ItemGroup>
 
 </Project>

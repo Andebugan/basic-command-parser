@@ -101,7 +101,7 @@ namespace TestSimpleCommandParser.TestValueParsers {
 
         public static IEnumerable<object[]> TestSpecialDayValueData() {
 
-            DateTime dateTime = DateTime.Today;
+            DateTime dateTime = DateTime.Today.ToLocalTime();
 
             yield return new object[] { new string[] { "12:00", "yesterday" }, dateTime.AddDays(-1).AddHours(12), new string[] { } };
             yield return new object[] { new string[] { "yesterday" }, dateTime.AddDays(-1), new string[] { } };
@@ -223,7 +223,7 @@ namespace TestSimpleCommandParser.TestValueParsers {
         public static IEnumerable<object[]> TestDateTimeRangeListData() {
             // empty value
             yield return new object[] { new string[] { },
-                new DateTime[][] { },
+                new DateTime[,] { },
                 new string[] { } };
 
             // normal list
@@ -237,7 +237,7 @@ namespace TestSimpleCommandParser.TestValueParsers {
             yield return new object[] { new string[] { ">12:00,", "13:00", "1.1.23", "|.", "test" },
                 new DateTime[,] {
                 { DateTime.Today.AddHours(12), DateTime.MaxValue },
-                { DateTime.MinValue, DateTime.Today } },
+                { new DateTime(2023, 1, 1, 13, 0, 0), DateTime.Today } },
                 new string[] { "test" } };
         }
 
@@ -252,7 +252,7 @@ namespace TestSimpleCommandParser.TestValueParsers {
             var result = parser.ParseRange(ref inputLst, new ValueParsingConfig());
 
             // Assert
-            for (var i = 0; i < expectedList.Length; i++) {
+            for (var i = 0; i < expectedList.GetLength(0); i++) {
                 Assert.Equal(expectedList[i,0], result[i].Start);
                 Assert.Equal(expectedList[i,1], result[i].End);
             }

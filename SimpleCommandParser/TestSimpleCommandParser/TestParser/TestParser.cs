@@ -12,18 +12,21 @@ using SimpleCommandParser.Command;
 namespace TestSimpleCommandParser.TestParser {
     public class TestParser {
         [Fact]
-        public void TestParserEmpty() {
+        public void TestParserNormal() {
             // Arrange
             ICommand testCommand1 = Mock.Of<ICommand>();
             ICommand testCommand2 = Mock.Of<ICommand>();
             ICommand testCommand3 = Mock.Of<ICommand>();
 
-            ICommandParser testCommandParser1 = Mock.Of<CommandParser>(
-                p => p.Parse(It.IsAny<string>()) == testCommand1);
-            ICommandParser testCommandParser2 = Mock.Of<CommandParser>(
-                p => p.Parse(It.IsAny<string>()) == testCommand2);
-            ICommandParser testCommandParser3 = Mock.Of<CommandParser>(
-                p => p.Parse(It.IsAny<string>()) == testCommand3);
+            ICommandParser testCommandParser1 = Mock.Of<ICommandParser>(
+                p => p.Parse(It.Is<string>(x => x.StartsWith("command1"))) == testCommand1);
+            testCommandParser1.Name = "command1";
+            ICommandParser testCommandParser2 = Mock.Of<ICommandParser>(
+                p => p.Parse(It.Is<string>(x => x.StartsWith("command2"))) == testCommand2);
+            testCommandParser2.Name = "command2";
+            ICommandParser testCommandParser3 = Mock.Of<ICommandParser>(
+                p => p.Parse(It.Is<string>(x => x.StartsWith("command3"))) == testCommand3);
+            testCommandParser3.Name = "command3";
 
             var commandParserList = new List<ICommandParser>() {
                 testCommandParser1,
@@ -73,11 +76,11 @@ namespace TestSimpleCommandParser.TestParser {
             ICommand testCommand2 = Mock.Of<ICommand>();
             ICommand testCommand3 = Mock.Of<ICommand>();
 
-            ICommandParser testCommandParser1 = Mock.Of<CommandParser>(
+            ICommandParser testCommandParser1 = Mock.Of<ICommandParser>(
                 p => p.Parse(It.IsAny<string>()) == testCommand1);
-            ICommandParser testCommandParser2 = Mock.Of<CommandParser>(
+            ICommandParser testCommandParser2 = Mock.Of<ICommandParser>(
                 p => p.Parse(It.IsAny<string>()) == testCommand2);
-            ICommandParser testCommandParser3 = Mock.Of<CommandParser>(
+            ICommandParser testCommandParser3 = Mock.Of<ICommandParser>(
                 p => p.Parse(It.IsAny<string>()) == testCommand3);
 
             var commandParserList = new List<ICommandParser>() {
