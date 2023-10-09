@@ -17,6 +17,13 @@ namespace SimpleCommandParser {
 
         public IList<ICommandOptionParser> Suboptions { get; set; }
 
+        public CommandOptionParser() {
+            Name = "";
+            Description = "";
+            Mandatory = false;
+            Suboptions = new List<ICommandOptionParser>();
+        }
+
         public CommandOptionParser(string name = "", string description = "", bool mandatory = false,
             IList<ICommandOptionParser>? suboptions = null) {
             Name = name;
@@ -37,7 +44,7 @@ namespace SimpleCommandParser {
 
             input = input.Remove(0, input.IndexOf(Name) + Name.Length);
 
-            var subparse = input.Trim().Split(SpecialSymbolsConfig.SuboptionDelimeter).ToList();
+            var subparse = input.Trim().Split(SpecialSymbolsConfig.SuboptionDelimeter, StringSplitOptions.RemoveEmptyEntries).ToList();
 
             if (subparse.Count() == 1)
                 option = ParseOption(subparse.First());

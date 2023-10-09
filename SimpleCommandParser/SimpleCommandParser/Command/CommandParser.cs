@@ -11,7 +11,14 @@ namespace SimpleCommandParser {
         public string Name { get; set; }
         public string Description { get; set; }
         public IList<ICommandOptionParser> Options { get; set; }
-        public ICommand Command { get; set; }
+        public ICommand? Command { get; set; }
+
+        public CommandParser() {
+            Name = "";
+            Description = "";
+            Options = new List<ICommandOptionParser> { };
+            Command = null;
+        }
 
         public CommandParser(string name, string description, IList<ICommandOptionParser> options, ICommand command) {
             Name = name;
@@ -27,6 +34,10 @@ namespace SimpleCommandParser {
         }
 
         public ICommand Parse(string input) {
+            if (Command == null) {
+                throw new Exception("parser command is not defined");
+            }
+
             input = input.Remove(0, input.IndexOf(Name) + Name.Length);
 
             var paramTrimmed = input.Trim();
@@ -34,7 +45,7 @@ namespace SimpleCommandParser {
                 throw new Exception("command parameters are empty");
             }
 
-            var options = paramTrimmed.Split(SpecialSymbolsConfig.OptionDelimeter).ToList();
+            var options = paramTrimmed.Split(SpecialSymbolsConfig.OptionDelimeter, StringSplitOptions.RemoveEmptyEntries).ToList();
 
             List<IOption> cmdOptions = new List<IOption>();
 
