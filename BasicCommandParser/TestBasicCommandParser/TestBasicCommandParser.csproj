@@ -24,7 +24,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\SimpleCommandParser\BasicCommandParser.csproj" />
+    <ProjectReference Include="..\BasicCommandParser\BasicCommandParser.csproj" />
   </ItemGroup>
 
 </Project>

@@ -11,7 +11,7 @@ namespace BasicCommandParser {
         public string Name { get; set; }
         public string Description { get; set; }
         public IList<ICommandOptionParser> Options { get; set; }
-        public ICommand Command { get; set; }
+        public ICommand? Command { get; set; }
 
         public void Clear();
         public ICommand Parse(string input);
