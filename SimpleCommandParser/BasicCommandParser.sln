@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33403.182
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpleCommandParser", "SimpleCommandParser\SimpleCommandParser.csproj", "{22A79CAA-3B68-4122-986D-D392B39E96C5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BasicCommandParser", "SimpleCommandParser\BasicCommandParser.csproj", "{22A79CAA-3B68-4122-986D-D392B39E96C5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestSimpleCommandParser", "testSimpleCommandParser\TestSimpleCommandParser.csproj", "{21A970D3-5F70-4E39-92A3-87C097696A8B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestSimpleCommandParser", "testSimpleCommandParser\TestSimpleCommandParser.csproj", "{21A970D3-5F70-4E39-92A3-87C097696A8B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
