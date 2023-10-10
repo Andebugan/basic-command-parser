@@ -1,11 +1,11 @@
-﻿using SimpleCommandParser.Command;
+﻿using BasicCommandParser.Command;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SimpleCommandParser {
+namespace BasicCommandParser {
     public class Parser : IParser {
 
         public IList<ICommandParser> CommandParsers { get; set; }

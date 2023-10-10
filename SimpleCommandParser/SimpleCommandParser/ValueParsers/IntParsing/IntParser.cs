@@ -1,11 +1,11 @@
-﻿using SimpleCommandParser.ValueParsers.FloatParsing;
+﻿using BasicCommandParser.ValueParsers.FloatParsing;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SimpleCommandParser.ValueParsers.IntParsing {
+namespace BasicCommandParser.ValueParsers.IntParsing {
     public class IntParser {
         public string ValueTypeName { get; } = "int";
         public int Parse(ref IList<string> input) {

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SimpleCommandParser.ValueParsers {
+namespace BasicCommandParser.ValueParsers {
     public interface IBoolParser: IValueParser {
         public bool Parse(ref IList<string> input);
 

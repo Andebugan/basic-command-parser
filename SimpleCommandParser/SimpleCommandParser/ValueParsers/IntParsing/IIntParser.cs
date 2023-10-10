@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SimpleCommandParser.ValueParsers.IntParsing {
+namespace BasicCommandParser.ValueParsers.IntParsing {
     public interface IIntParser: IValueParser {
         public int Parse(ref IList<string> input);
 

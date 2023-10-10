@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SimpleCommandParser.ValueParsers.DateTimeParsing {
+namespace BasicCommandParser.ValueParsers.DateTimeParsing {
     public class DateTimeParser : IDateTimeParser {
         DateFormats dateFormats;
 

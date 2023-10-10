@@ -1,5 +1,5 @@
-﻿using SimpleCommandParser.Option;
-using SimpleCommandParser.ValueParsers;
+﻿using BasicCommandParser.Option;
+using BasicCommandParser.ValueParsers;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -8,7 +8,7 @@ using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SimpleCommandParser {
+namespace BasicCommandParser {
     public abstract class CommandOptionParser : ICommandOptionParser {
         public string Name { get; set; }
         public string Description { get; set; }

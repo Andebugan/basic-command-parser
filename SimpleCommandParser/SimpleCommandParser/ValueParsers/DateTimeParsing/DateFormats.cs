@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SimpleCommandParser.ValueParsers.DateTimeParsing {
+namespace BasicCommandParser.ValueParsers.DateTimeParsing {
     public struct DateFormats {
 
         public List<string> timeFormats { get; set; } = new List<string> {

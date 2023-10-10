@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SimpleCommandParser.ValueParsers.FloatParsing {
+namespace BasicCommandParser.ValueParsers.FloatParsing {
     public struct FloatRange {
         public float Start;
         public float End;

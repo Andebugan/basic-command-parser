@@ -1,11 +1,11 @@
-﻿using SimpleCommandParser.ValueParsers.IntParsing;
+﻿using BasicCommandParser.ValueParsers.IntParsing;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SimpleCommandParser.ValueParsers.StringParsing {
+namespace BasicCommandParser.ValueParsers.StringParsing {
     public class StringParser {
         public string ValueTypeName { get; } = "string";
 

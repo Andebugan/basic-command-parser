@@ -1,4 +1,4 @@
-﻿namespace SimpleCommandParser.ValueParsers.DateTimeParsing {
+﻿namespace BasicCommandParser.ValueParsers.DateTimeParsing {
     public struct DateTimeRange {
 
         public DateTimeRange(DateTime start, DateTime end) {

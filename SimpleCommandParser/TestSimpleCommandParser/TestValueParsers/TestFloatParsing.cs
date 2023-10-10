@@ -1,5 +1,5 @@
-﻿using SimpleCommandParser.ValueParsers.FloatParsing;
-using SimpleCommandParser.ValueParsers;
+﻿using BasicCommandParser.ValueParsers.FloatParsing;
+using BasicCommandParser.ValueParsers;
 using System;
 using System.Collections.Generic;
 using System.Linq;

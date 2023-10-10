@@ -6,9 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.VisualBasic;
-using SimpleCommandParser.ValueParsers;
-using SimpleCommandParser.ValueParsers.BoolParsing;
-using SimpleCommandParser.ValueParsers.DateTimeParsing;
+using BasicCommandParser.ValueParsers;
+using BasicCommandParser.ValueParsers.BoolParsing;
+using BasicCommandParser.ValueParsers.DateTimeParsing;
 using Xunit.Sdk;
 
 namespace TestSimpleCommandParser.TestValueParsers {

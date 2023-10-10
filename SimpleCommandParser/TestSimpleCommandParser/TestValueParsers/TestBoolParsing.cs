@@ -1,5 +1,5 @@
-﻿using SimpleCommandParser.ValueParsers;
-using SimpleCommandParser.ValueParsers.BoolParsing;
+﻿using BasicCommandParser.ValueParsers;
+using BasicCommandParser.ValueParsers.BoolParsing;
 using System;
 using System.Collections;
 using System.Collections.Generic;

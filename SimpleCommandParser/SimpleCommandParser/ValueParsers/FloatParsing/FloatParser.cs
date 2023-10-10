@@ -1,11 +1,11 @@
-﻿using SimpleCommandParser.ValueParsers.DateTimeParsing;
+﻿using BasicCommandParser.ValueParsers.DateTimeParsing;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SimpleCommandParser.ValueParsers.FloatParsing {
+namespace BasicCommandParser.ValueParsers.FloatParsing {
     public class FloatParser : IFloatParser {
         public string ValueTypeName { get; } = "float";
 

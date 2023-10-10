@@ -1,11 +1,11 @@
-﻿using SimpleCommandParser.ValueParsers.IntParsing;
-using SimpleCommandParser.ValueParsers;
+﻿using BasicCommandParser.ValueParsers.IntParsing;
+using BasicCommandParser.ValueParsers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using SimpleCommandParser.ValueParsers.FloatParsing;
+using BasicCommandParser.ValueParsers.FloatParsing;
 
 namespace TestSimpleCommandParser.TestValueParsers {
     public class TestIntParsing {

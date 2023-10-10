@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SimpleCommandParser {
+namespace BasicCommandParser {
     static class SpecialSymbolsConfig {
         public static string OptionDelimeter { get; set; } = "--";
 

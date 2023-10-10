@@ -1,4 +1,4 @@
-﻿using SimpleCommandParser;
+﻿using BasicCommandParser;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using Moq;
 using System.Security.Cryptography;
 using System.ComponentModel.DataAnnotations;
-using SimpleCommandParser.Command;
+using BasicCommandParser.Command;
 
 namespace TestSimpleCommandParser.TestParser {
     public class TestParser {

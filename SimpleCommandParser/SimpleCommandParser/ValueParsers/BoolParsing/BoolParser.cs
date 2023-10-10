@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SimpleCommandParser.ValueParsers.BoolParsing {
+namespace BasicCommandParser.ValueParsers.BoolParsing {
     public class BoolParser : IBoolParser {
         public Dictionary<string, bool> boolFormats { get; set; } = new Dictionary<string, bool> {
             {"t", true},

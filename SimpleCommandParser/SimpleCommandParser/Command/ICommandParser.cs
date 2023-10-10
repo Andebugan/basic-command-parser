@@ -1,12 +1,12 @@
-﻿using SimpleCommandParser.Command;
-using SimpleCommandParser.Option;
+﻿using BasicCommandParser.Command;
+using BasicCommandParser.Option;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SimpleCommandParser {
+namespace BasicCommandParser {
     public interface ICommandParser {
         public string Name { get; set; }
         public string Description { get; set; }

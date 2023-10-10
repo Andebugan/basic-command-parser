@@ -1,12 +1,12 @@
-﻿using SimpleCommandParser;
+﻿using BasicCommandParser;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Moq;
-using SimpleCommandParser.Option;
-using SimpleCommandParser.Command;
+using BasicCommandParser.Option;
+using BasicCommandParser.Command;
 
 namespace TestSimpleCommandParser.TestParser {
     public class TestCommandParser {
