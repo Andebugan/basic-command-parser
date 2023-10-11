@@ -1,1 +1,2 @@
-# basic-command-parser
+# BasicCommandParser
+## General
